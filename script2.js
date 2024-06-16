@@ -5,6 +5,7 @@ function test() {
     console.log(awayTeamSelected)
 }
 function addNumbers() {
+    //fetch('http://127.0.0.1:5000/api/get_prediction', {
     fetch('http://63.34.29.80:5000/api/get_prediction', {
         method: 'POST',
         headers: {
@@ -16,7 +17,7 @@ function addNumbers() {
         .then(data => {
             //document.getElementById('result').textContent = 'Result: ' + data.result;
             //document.getElementById('Vainqueur').innerHTML = ""
-            document.getElementById('Vainqueur').innerHTML = "Vainqeur : <img src='img/" + data.result + ".png' class='logoTeam'>  " + data.result;
+            document.getElementById('Vainqueur').innerHTML = "Vainqueur : <img src='img/" + data.result + ".png' class='logoTeam'>  " + data.result;
         })
         .catch(error => console.error('Error:', error));
 }
@@ -57,4 +58,6 @@ function changeAwayTeamSelected(newAwayTeamSelected) {
     awayTeamLogo.innerHTML = ''
     awayTeamLogo.innerHTML = "<img src='img/" + awayTeamSelected + ".png ' class='logoTeamPred'>"
 }
-generateTableRows()
+function main() {
+    generateTableRows()
+}
