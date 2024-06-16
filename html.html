@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table Bootstrap</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="img/LOGO.png" alt="Logo">
+                AI PREDICT
+            </a>
+            <!-- Bouton hamburger pour les petits écrans -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">À propos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container mt-5 pt-5">
+        <h1>Prédiction</h1>
+        <table class="table">
+            <tr>
+                <td style="height: 400px;" id="homeTeamLogo"><img src='img/Atlanta Hawks.png' class='logoTeamPred'></td> 
+                <td style="height: 400px;" id="awayTeamLogo"><img src='img/Boston Celtics.png' class='logoTeamPred'></td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Sélectionnez l'équipe à domicile
+                        </button>
+                        <div id="dpHome" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Sélectionnez l'équipe à domicile
+                        </button>
+                        <div id="dpAway" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan='2'><button type="button" class="btn btn-primary" onclick="addNumbers()">Prédire</button></td>
+            </tr>
+            <tr>
+                <td id="Vainqueur" colspan='2'></td>
+            </tr>
+        </table>
+
+        <script>
+            homeTeamSelected = "Atlanta Hawks"
+            awayTeamSelected = "Boston Celtics"
+            function test(){
+                console.log(homeTeamSelected)
+                console.log(awayTeamSelected)
+            }
+            function addNumbers() {
+                fetch('http://127.0.0.1:5000/api/get_prediction', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ num1: homeTeamSelected, num2: awayTeamSelected })
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        //document.getElementById('result').textContent = 'Result: ' + data.result;
+                        //document.getElementById('Vainqueur').innerHTML = ""
+                        document.getElementById('Vainqueur').innerHTML = "Vainqeur : <img src='img/" + data.result + ".png' class='logoTeam'>  " + data.result;
+                    })
+                    .catch(error => console.error('Error:', error));
+            }
+            function generateTableRows(data) {
+                var dpHome = document.getElementById("dpHome");
+                var dpAway = document.getElementById("dpAway");
+                var rowHome = "";
+                var rowAway = "";
+                let nbaTeams = [
+                    "Atlanta Hawks", "Boston Celtics", "Brooklyn Nets", "Charlotte Hornets",
+                    "Chicago Bulls", "Cleveland Cavaliers", "Dallas Mavericks", "Denver Nuggets",
+                    "Detroit Pistons", "Golden State Warriors", "Houston Rockets", "Indiana Pacers",
+                    "Los Angeles Clippers", "Los Angeles Lakers", "Memphis Grizzlies", "Miami Heat",
+                    "Milwaukee Bucks", "Minnesota Timberwolves", "New Orleans Pelicans", "New York Knicks",
+                    "Oklahoma City Thunder", "Orlando Magic", "Philadelphia 76ers", "Phoenix Suns",
+                    "Portland Trail Blazers", "Sacramento Kings", "San Antonio Spurs", "Toronto Raptors",
+                    "Utah Jazz", "Washington Wizards"
+                ];
+
+                for (let team of nbaTeams) {
+                    rowHome += "<a class='dropdown-item' href='#' onclick=\"changeHomeTeamSelected('" + team + "')\"" + ">" + team + "</a>"
+                    rowAway += "<a class='dropdown-item' href='#' onclick=\"changeAwayTeamSelected('" + team + "')\"" + ">" + team + "</a>"
+                }
+                dpHome.innerHTML += rowHome;
+                dpAway.innerHTML += rowAway;
+            }
+            function changeHomeTeamSelected(newHomeTeamSelected){
+                homeTeamSelected = newHomeTeamSelected
+                //console.log(homeTeamSelected)
+                homeTeamLogo = document.getElementById("homeTeamLogo")
+                homeTeamLogo.innerHTML = ''
+                homeTeamLogo.innerHTML = "<img src='img/" + homeTeamSelected + ".png ' class='logoTeamPred'>"
+            }
+            function changeAwayTeamSelected(newAwayTeamSelected){
+                awayTeamSelected = newAwayTeamSelected
+                //console.log(awayTeamSelected)
+                awayTeamLogo = document.getElementById("awayTeamLogo")
+                awayTeamLogo.innerHTML = ''
+                awayTeamLogo.innerHTML = "<img src='img/" + awayTeamSelected + ".png ' class='logoTeamPred'>"
+            }
+            generateTableRows()
+        </script>
+    </div>
+
+    <!-- jQuery, Popper.js, and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

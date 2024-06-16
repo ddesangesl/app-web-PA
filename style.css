@@ -1,0 +1,41 @@
+.table td,
+.table th {
+    padding: .75rem;
+    vertical-align: middle;
+    text-align: center;
+    border-bottom: 1px solid #dee2e6;
+}
+
+img.logoTeam {
+    width: 40px;
+}
+
+img.logoTeamPred{
+    width: 250px;
+}
+
+.chakra-petch-bold {
+    font-family: "Chakra Petch", sans-serif;
+    font-style: normal;
+}
+
+.navbar-custom {
+    background-color: #007bff;
+    /* Couleur de fond bleue */
+}
+
+.navbar-brand img {
+    max-height: 40px;
+    /* Hauteur maximale de l'image */
+    margin-right: 10px;
+    /* Marge à droite de l'image */
+}
+
+.mt-5, .my-5 {
+    margin-top: 2rem !important;
+}
+
+.dropdown-menu {
+    max-height: 150px; /* Limite la hauteur de la liste déroulante */
+    overflow-y: auto;  /* Ajoute une barre de défilement verticale */
+}

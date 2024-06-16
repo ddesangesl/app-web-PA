@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Table Bootstrap</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+  <script src="script.js"></script>
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top"> <!-- Ajout de la classe fixed-top -->
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <img src="img/LOGO.png" alt="Logo">
+        AI PREDICT
+      </a>
+      <!-- Bouton hamburger pour les petits écrans -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Accueil</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">À propos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Jaro:opsz@6..72&display=swap');
+  </style>
+
+  <div class="container mt-5">
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th></th>
+          <th> </th>
+          <th> </th>
+          <th> </th>
+          <th> </th>
+          <th> </th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="table-body">
+        <!-- Table body will be filled dynamically -->
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    // Utiliser la fonction définie dans le fichier JavaScript externe
+    main();
+  </script>
+
+</body>
+
+</html>
