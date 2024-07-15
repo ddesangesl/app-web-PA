@@ -5,7 +5,6 @@ function test() {
     console.log(awayTeamSelected)
 }
 function addNumbers() {
-    //fetch('http://127.0.0.1:5000/api/get_prediction', {
     fetch('http://63.34.29.80:5000/api/get_prediction', {
         method: 'POST',
         headers: {

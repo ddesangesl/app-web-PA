@@ -40,7 +40,7 @@ function generateTableRows(data) {
 
 function main() {
     let data;
-    fetch('KNN_predict.json')
+    fetch('GB_prediction.json')
         .then(response => response.json())
         .then(jsonData => {
             generateTableRows(jsonData)
